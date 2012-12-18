@@ -1,15 +1,15 @@
 package models
 
-import play.data.format.Formats.DateTime
+import org.scala_tools.time.Imports._
 import com.mongodb.casbah.Imports._
 
 // Enquiry (farmer's application) model
 case class Enquiry (
-  id: ObjectId,
+  id: Option[ObjectId],
   firstName: String,
-  middleName: Option[String],
+  middleName: String,
   lastName: String,
-  previousNames: Option[String],
+  previousNames: String,
   email: String,
   createdAt: DateTime
 )

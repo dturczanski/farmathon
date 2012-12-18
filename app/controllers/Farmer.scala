@@ -4,8 +4,8 @@ import play.api._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
-import models.EnquiryName
 import services.EnquiryService
+import viewmodels.EnquiryName
 
 object Farmer extends Controller {
   
@@ -25,10 +25,9 @@ def index = Action { implicit request =>
 def farmerName = Action { implicit request =>
 	farmerNameForm.bindFromRequest.fold(
 		form => BadRequest(views.html.name(form)),
-		enquiry => {
+		enquiryName => {
 			//EnquiryService.create(enquiryName)
-			//Redirect(routes.Application.email()).flashing("message" -> "Names information successfully saved")
-		  Redirect(routes.Application.index())
+			Redirect(routes.Farmer.farmerName()).flashing("message" -> "Names information successfully saved")
 		}
 	)
 }

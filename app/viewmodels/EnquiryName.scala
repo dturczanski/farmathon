@@ -1,6 +1,4 @@
-package models
-
-import play.data.format.Formats.DateTime
+package viewmodels
 
 case class EnquiryName (
   firstName: String,
