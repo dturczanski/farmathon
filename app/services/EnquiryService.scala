@@ -8,5 +8,5 @@ import models._
 object EnquiryService {
   val data = MongoConnection()("farmathon")("enquiries")
 
-  all = data.map(grater[Enquiry].asObject(_)).toList
+  def all = data.map(grater[Enquiry].asObject(_)).toList
 }
