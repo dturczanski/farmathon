@@ -1,0 +1,36 @@
+@(farmerNameForm: Form[models.EnquiryName])(implicit flash: Flash)
+
+@import play.api.i18n._
+@import views.html.helper._
+
+@input(field: Field, label: String, fieldType: Symbol = 'text) = {
+	<div class="control-group @if(field.hasErrors) {error}">
+		<label class="control-label" for="@field.id">@label</label>
+		<div class="controls">
+			<input type="@fieldType.name" value="@field.value" name="@field.id" />
+			@if(field.hasErrors){
+				<span class="help-inline">
+					@Messages(field.error.head.message)
+				</span>
+			}
+		</div>
+	</div>
+}
+
+@main("Create new application") {
+	@form(action = routes.Farmer.farmerName, 'class -> "form-horizontal") {
+		<fieldset>
+			<legend>Identifying myself</legend>
+			@farmerNameForm.globalError.map { error =>
+				<div class='row'>
+					<div class="alert alert-error">@error.message</div>
+				</div>
+			}
+			@input(farmerNameForm("firstName"), "First name")
+			@input(farmerNameForm("middleName"), "Middle name (optional)")
+			@input(farmerNameForm("lastName"), "Last name")
+			@input(farmerNameForm("previousNames"), "Previous or maiden name")
+		</fieldset>
+		<input type="submit" class="btn" value="Proceed"/>
+	}
+}
