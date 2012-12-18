@@ -10,6 +10,5 @@ case class Enquiry (
   middleName: String,
   lastName: String,
   previousNames: String,
-  email: String,
-  createdAt: DateTime
+  email: String
 )

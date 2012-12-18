@@ -13,7 +13,7 @@ object EnquiryService {
   def all = data.map(grater[Enquiry].asObject(_)).toList
   
   def create(enquiryName: EnquiryName) {
-    val enq = Enquiry(None, enquiryName.firstName, enquiryName.middleName, enquiryName.lastName, enquiryName.previousNames, "", DateTime.now)
+    val enq = Enquiry(None, enquiryName.firstName, enquiryName.middleName, enquiryName.lastName, enquiryName.previousNames, "")
 	  data += grater[Enquiry].asDBObject(enq)
   }
 }
