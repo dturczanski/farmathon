@@ -12,6 +12,7 @@ POST 	/authenticate				controllers.Auth.authenticate
 
 # Enquiries
 GET     /enquiries                  controllers.Enquiries.index
+POST    /enquiries                  controllers.Enquiries.search
 GET     /enquiries/:id              controllers.Enquiries.details(id: String)
 POST    /enquiries/accept/:id       controllers.Enquiries.accept(id: String)
 POST    /enquiries/decline/:id      controllers.Enquiries.decline(id: String)
