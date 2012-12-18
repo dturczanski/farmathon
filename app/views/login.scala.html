@@ -1,9 +1,9 @@
 @(form: play.api.data.Form[(String, String)])(implicit flash: Flash)
 
-@main("Login as an employee") {
+
     
 	@helper.form(routes.Auth.authenticate) {
-            
+        
 		<h1>Sign in</h1>
             
 		@form.globalError.map { error =>
@@ -30,4 +30,3 @@
             
 	}
     
-}

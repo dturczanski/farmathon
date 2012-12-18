@@ -1,4 +1,4 @@
-@(enquiryForm: Form[(String,String)])
+@(enquiryForm: Form[(String,String)])(implicit request: RequestHeader)
 
 @import helper._
 
@@ -6,6 +6,7 @@
 @import views.html.helper._
 
 @main("Welcome to Farmathon") {
+
 <div>
 	  @form(action = routes.Enquiries.search, args = 'id -> "enquirySearchForm") {
 
