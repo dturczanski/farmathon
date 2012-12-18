@@ -26,7 +26,7 @@ def farmerName = Action { implicit request =>
 	farmerNameForm.bindFromRequest.fold(
 		form => BadRequest(views.html.name(form)),
 		enquiryName => {
-			//EnquiryService.create(enquiryName)
+			EnquiryService.create(enquiryName)
 			Redirect(routes.Farmer.farmerName()).flashing("message" -> "Names information successfully saved")
 		}
 	)
