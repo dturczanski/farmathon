@@ -8,9 +8,9 @@ GET     /                           controllers.Application.index
 
 # Enquiries
 GET     /enquiries                  controllers.Enquiries.index
-GET     /enquiries/:id              controllers.Enquiries.details(id: Long)
-POST    /enquiries/accept/:id       controllers.Enquiries.details(id: Long)
-POST    /enquiries/decline/:id      controllers.Enquiries.details(id: Long)
+GET     /enquiries/:id              controllers.Enquiries.details(id: String)
+POST    /enquiries/accept/:id       controllers.Enquiries.details(id: String)
+POST    /enquiries/decline/:id      controllers.Enquiries.details(id: String)
 GET		/farmer						controllers.Farmer.index
 GET		/farmer/name				controllers.Farmer.index
 POST	/farmer/name				controllers.Farmer.farmerName
