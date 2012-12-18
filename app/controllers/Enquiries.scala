@@ -8,11 +8,11 @@ object Enquiries extends Controller {
   def index = TODO
 
   // display enquiry details
-  def details(id: Long) = TODO
+  def details(id: String) = TODO
 
   // accept enquiry
-  def accept(id: Long) = TODO
+  def accept(id: String) = TODO
 
   // decline enquiry
-  def decline(id: Long) = TODO
+  def decline(id: String) = TODO
 }
