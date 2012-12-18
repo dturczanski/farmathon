@@ -8,7 +8,7 @@ object Enquiries extends Controller {
   def index = TODO
 
   // display enquiry details
-  def details(id: Long) = Action
+  def details(id: Long) = TODO
 
   // accept enquiry
   def accept(id: Long) = TODO
