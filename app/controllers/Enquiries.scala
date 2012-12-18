@@ -22,7 +22,7 @@ object Enquiries extends Controller {
       formWithErrors => BadRequest(views.html.index(formWithErrors)),
       {case (surname, enquiryId) => {
         //EnquiryService.find(surname, enquiryId);
-        Ok(views.html.enquiries.enquiry())        
+        Ok(views.html.enquiries.detail())        
       }}
       )
   }
