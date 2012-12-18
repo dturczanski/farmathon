@@ -5,6 +5,10 @@
 # Home page
 GET     /                           controllers.Application.index
 
+#Employee authentication
+GET     /login                      controllers.Auth.login
+POST     /authenticate                      controllers.Auth.authenticate
+
 
 # Enquiries
 GET     /enquiries                  controllers.Enquiries.index
