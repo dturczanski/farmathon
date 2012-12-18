@@ -13,8 +13,8 @@ POST     /authenticate                      controllers.Auth.authenticate
 # Enquiries
 GET     /enquiries                  controllers.Enquiries.index
 GET     /enquiries/:id              controllers.Enquiries.details(id: String)
-POST    /enquiries/accept/:id       controllers.Enquiries.details(id: String)
-POST    /enquiries/decline/:id      controllers.Enquiries.details(id: String)
+POST    /enquiries/accept/:id       controllers.Enquiries.accept(id: String)
+POST    /enquiries/decline/:id      controllers.Enquiries.decline(id: String)
 
 
 # Map static resources from the /public folder to the /assets URL path
