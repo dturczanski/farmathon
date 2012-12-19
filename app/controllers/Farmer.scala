@@ -5,8 +5,7 @@ import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
 import services.EnquiryService
-import viewmodels.EnquiryName
-import viewmodels.EnquiryEmail
+import viewmodels._
 
 object Farmer extends Controller {
   
@@ -22,9 +21,15 @@ def farmerNameForm = Form(
 
 def farmerEmailForm = Form(
 	mapping(
-	    "id" -> text,
+	    "id" -> nonEmptyText,
 		"email" -> nonEmptyText
 	)(EnquiryEmail.apply)(EnquiryEmail.unapply)
+)
+
+def changeDetailsForm = Form(
+	mapping(
+	    "id" -> nonEmptyText
+	)(EnquiryId.apply)(EnquiryId.unapply)
 )
 
 def index = Action { implicit request =>
@@ -48,7 +53,15 @@ def farmerEmail = Action { implicit request =>
 	    	EnquiryService.update(enquiryEmail)
 	    	//Ok(views.html.index())
 	    	
-	    	Ok(views.html.farmer.name(farmerNameForm.fill(EnquiryService.getName(enquiryEmail.id))))
+	    	Ok(views.html.farmer.verify(changeDetailsForm.fill(EnquiryId(enquiryEmail.id))))
+	    })
+}
+
+def changeDetails = Action { implicit request =>
+	changeDetailsForm.bindFromRequest.fold(
+	    form => BadRequest(views.html.farmer.verify(form)),
+	    enquiryId => {
+	    	Ok(views.html.farmer.name(farmerNameForm.fill(EnquiryService.getName(enquiryId.id))))
 	    })
 }
 

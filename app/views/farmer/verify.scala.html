@@ -1,0 +1,28 @@
+@(changeDetailsForm: Form[viewmodels.EnquiryId])(implicit flash: Flash, request: RequestHeader)
+
+@import play.api.i18n._
+@import views.html.helper._
+
+@input(field: Field, label: String, fieldType: Symbol = 'text) = {
+	<div class="control-group @if(field.hasErrors) {error}">
+		<label class="control-label" for="@field.id">@label</label>
+		<div class="controls">
+			<input type="@fieldType.name" value="@field.value" name="@field.id" />
+			@if(field.hasErrors){
+				<span class="help-inline">
+					@Messages(field.error.head.message)
+				</span>
+			}
+		</div>
+	</div>
+}
+
+@main("Create new application") {
+	@form(action = routes.Farmer.changeDetails, 'class -> "form-horizontal") {
+		<fieldset>
+			<legend>Change details</legend>
+			<input type="hidden" value="@changeDetailsForm("id").value" name="id" />
+		</fieldset>
+		<input type="submit" class="btn" value="Change your details"/>
+	}
+}
