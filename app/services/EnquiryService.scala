@@ -12,8 +12,25 @@ object EnquiryService {
 
   def all = data.map(grater[Enquiry].asObject(_)).toList
   
-  def create(enquiryName: EnquiryName) {
-    val enq = Enquiry(None, enquiryName.firstName, enquiryName.middleName, enquiryName.lastName, enquiryName.previousNames, "")
-	data += grater[Enquiry].asDBObject(enq)
+  def get(id: ObjectId): Enquiry = {
+    val o : DBObject = MongoDBObject("id" -> id)
+    val enq : Enquiry = grater[Enquiry].asObject(o)
+    enq
+  }
+  
+  def update(id: Option[ObjectId], enquiryName: EnquiryName) {
+    id match {
+      case Some(objectId) => {
+        val enq = get(objectId)
+        enq.firstName = enquiryName.firstName
+        
+      }
+      
+      case None => {
+    	val enq = Enquiry(None, enquiryName.firstName, enquiryName.middleName, enquiryName.lastName, enquiryName.previousNames, "")
+    	data += grater[Enquiry].asDBObject(enq)
+      }
+    } 
+
   }
 }

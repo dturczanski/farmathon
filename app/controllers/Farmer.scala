@@ -18,18 +18,33 @@ def farmerNameForm = Form(
 	)(EnquiryName.apply)(EnquiryName.unapply)
 )
 
+def farmerEmailForm = Form(
+	mapping(
+		"email" -> nonEmptyText
+	)(EnquiryEmail.apply)(EnquiryEmail.unapply)
+)
+
 def index = Action { implicit request =>
-	Ok(views.html.name(farmerNameForm))
+	Ok(views.html.farmer.name(farmerNameForm))
 }
 
 def farmerName = Action { implicit request =>
 	farmerNameForm.bindFromRequest.fold(
-		form => BadRequest(views.html.name(form)),
+		form => BadRequest(views.html.farmer.name(form)),
 		enquiryName => {
 			EnquiryService.create(enquiryName)
-			Redirect(routes.Farmer.farmerName()).flashing("message" -> "Names information successfully saved")
+			Ok(views.html.farmer.email(farmerEmailForm)).flashing("message" -> "Names information successfully saved")
 		}
 	)
+}
+
+def farmerEmail = Action { implicit request =>
+	farmerEmailForm.bindFromRequest.fold(
+	    form => BadRequest(views.html.farmer.email(form)),
+	    enquiryName => {
+	    	EnquiryService.sdfsd(enquiryEmail)
+	    	Redirect(router.farmer)
+	    })
 }
 
 }
