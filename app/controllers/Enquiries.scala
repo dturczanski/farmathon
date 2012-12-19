@@ -48,22 +48,19 @@ object Enquiries extends Controller with Secured {
   }
 
   def searchForm = Action { implicit request =>
-    Ok(html.enquiries.search(enquirySearchForm))
+    Ok(html.enquiries.search(enquirySearchForm, None))
   }
 
   def search = Action { implicit request =>
     enquirySearchForm.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.enquiries.search(formWithErrors)),
+      formWithErrors => BadRequest(html.enquiries.search(formWithErrors, None)),
       {
         case (surname, enquiryId) => {
           val enquiry = EnquiryService.findByIdAndSurname(enquiryId, surname)
           enquiry match {
-            case None => Ok(html.enquiries.search(enquirySearchForm)).flashing("success" -> "Application not found")
+            case None => Ok(html.enquiries.search(enquirySearchForm, Some("Application not found")))
             case enquiry => Ok(html.enquiries.detail(enquiry.get))
           }
-        }
-        case _ => {
-          Ok(html.enquiries.search(enquirySearchForm))
         }
       })
   }
