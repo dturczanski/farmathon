@@ -1,5 +1,7 @@
 package controllers
 
+import auth.Secured
+
 import play.api._
 import play.api.mvc._
 import play.api.data._
@@ -10,7 +12,7 @@ import models.Enquiry
 import anorm._
 import views._
 
-object Enquiries extends Controller {
+object Enquiries extends Controller with Secured{
   
    val enquirySearchForm = Form(
     tuple(
@@ -20,18 +22,18 @@ object Enquiries extends Controller {
   )
   
   // display list of enquiries
-  def index = Action { implicit request =>
+  def index = withAuth { username => implicit request =>
     Ok(html.enquiries.index(EnquiryService.all))
   }
 
   // display enquiry details
-  def details(id: String) = Action {implicit request =>
+  def details(id: String) = withAuth { username => implicit request =>
     val enquiry = EnquiryService.get(new ObjectId(id))
   	Ok(views.html.enquiries.details(enquiry))
   }
   
   // accept enquiry
-  def accept(id: String) = Action {implicit request =>
+  def accept(id: String) = withAuth { username => implicit request =>
     val acceptedParam = request.body.asFormUrlEncoded.get("accepted")(0)
     if (acceptedParam.toBoolean) EnquiryService.updateStatus(id, "accepted")
     else EnquiryService.updateStatus(id, "rejected")

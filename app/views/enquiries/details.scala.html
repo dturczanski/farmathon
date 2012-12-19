@@ -6,9 +6,9 @@ Status: @enquiry.status
 
 
 @if(enquiry.status=="pending") {
-<form id="accept_form" action="@routes.Enquiries.accept(enquiry._id.get.toString)" method="post">
-	<input type="button" id="acceptBtn" value="Accept" />
-	<input type="button" id="rejectBtn" value="Reject" />
-</form>
 }
+<form id="accept_form" action="@routes.Enquiries.accept(enquiry._id.get.toString)" method="post">
+	<input type="button" id="acceptBtn" class="btn btn-success" value="Accept" />
+	<input type="button" id="rejectBtn" class="btn btn-danger" value="Reject" />
+</form>
 }
