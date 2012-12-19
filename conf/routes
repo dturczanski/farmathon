@@ -17,9 +17,12 @@ GET     /enquiries/search           controllers.Enquiries.search
 GET     /enquiries/:id              controllers.Enquiries.details(id: String)
 POST    /enquiries/accept/:id       controllers.Enquiries.accept(id: String)
 POST    /enquiries/decline/:id      controllers.Enquiries.decline(id: String)
-GET		/farmer						controllers.Farmer.index
-GET		/farmer/name				controllers.Farmer.index
-POST	/farmer/name				controllers.Farmer.farmerName
+
+
+# Wizard
+GET		/apply						controllers.Farmer.index
+GET		/apply/step1				controllers.Farmer.index
+POST	/apply/step2				controllers.Farmer.farmerName
 
 
 # Map static resources from the /public folder to the /assets URL path
