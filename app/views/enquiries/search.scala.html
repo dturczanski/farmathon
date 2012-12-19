@@ -1,4 +1,4 @@
-@(enquiryForm: Form[(String,String)])(implicit request: RequestHeader)
+@(enquiryForm: Form[(String,String)])(implicit flash: Flash, request: RequestHeader)
 
 
 @import helper._
@@ -7,6 +7,11 @@
 
 @main("Search for enquiries"){
 <div>
+@flash.get("notFound").map { message =>
+		    <p class="alert alert-error">
+		        @message
+		    </p>
+	}
 	  @form(action = routes.Enquiries.search, args = 'id -> "enquirySearchForm") {
 
         @inputText(

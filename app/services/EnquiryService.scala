@@ -65,6 +65,12 @@ object EnquiryService {
     EnquiryDAO.update(MongoDBObject("_id" -> enquiry._id), grater[Enquiry].asDBObject(enquiry.copy(status = newStatus)), false, false)
   }
 
-  def findByIdAndSurname(id: String, surname: String) = EnquiryDAO.findOne(MongoDBObject("_id" -> new ObjectId(id), "lastName" -> surname))
+  def findByIdAndSurname(id: String, surname: String) = {
+    var pattern = "[0-9a-f]{24}".r
+    id match {
+      case pattern(id) => EnquiryDAO.findOne(MongoDBObject("_id" -> new ObjectId(id), "lastName" -> surname))
+      case _ => None
+    }
+  }
 
 }
