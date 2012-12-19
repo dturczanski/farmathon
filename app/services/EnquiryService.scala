@@ -14,6 +14,8 @@ object EnquiryService {
 
   def all = EnquiryDAO.find(MongoDBObject.empty).toList
   
+  def outstanding = EnquiryDAO.find(MongoDBObject("status" -> "pending")).toList
+
   def get(id: ObjectId): Enquiry = {
     val enq: Option[Enquiry] = EnquiryDAO.findOneById(id)
     enq.get
