@@ -41,7 +41,7 @@ def farmerName = Action { implicit request =>
 		form => BadRequest(views.html.farmer.name(form)),
 		enquiryName => {
 			val id = EnquiryService.update(enquiryName)
-			Ok(views.html.farmer.email(farmerEmailForm.fill(EnquiryService.getEmail(id)))).flashing("message" -> "Names information successfully saved")
+			Ok(views.html.farmer.email(farmerEmailForm.fill(EnquiryService.getEmail(id))))
 		}
 	)
 }
@@ -75,7 +75,7 @@ def confirmDetails = Action { implicit request =>
 	    },
 	    enquiryId => {
 	        EnquiryService.updateStatus(enquiryId.id, "pending")
-	        EmailService.sendEmail(enquiryId.id)
+	        EmailService.sendConfirmationEmail(enquiryId.id)
 	    	Ok(views.html.farmer.confirm(emptyForm.fill(enquiryId)))
 	    })
 }

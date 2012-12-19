@@ -6,7 +6,7 @@ import play.api._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
-import services.EnquiryService
+import services._
 import com.mongodb.casbah.Imports._
 import models.Enquiry
 import anorm._
@@ -36,8 +36,14 @@ object Enquiries extends Controller with Secured {
   def accept(id: String) = withAuth { username =>
     implicit request =>
       val acceptedParam = request.body.asFormUrlEncoded.get("accepted")(0)
-      if (acceptedParam.toBoolean) EnquiryService.updateStatus(id, "accepted")
-      else EnquiryService.updateStatus(id, "rejected")
+      if (acceptedParam.toBoolean)
+      {
+    	  EnquiryService.updateStatus(id, "accepted")
+    	  EmailService.sendAcceptanceEmail(id)
+        } else {
+        	EnquiryService.updateStatus(id, "rejected")
+        	EmailService.sendRejectionEmail(id)
+        }
       Redirect(routes.Enquiries.details(id))
   }
 
