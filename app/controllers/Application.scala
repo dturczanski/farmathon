@@ -12,9 +12,9 @@ object Application extends Controller {
       "surname" -> nonEmptyText,
       "enquiryId" -> nonEmptyText
     )
-  )  
-  
-  def index = Action {
+  ) 
+
+  def index = Action { implicit request =>
     Ok(views.html.index(enquirySearchForm))
   }  
 }

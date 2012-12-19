@@ -16,7 +16,9 @@ object Enquiries extends Controller {
   ) 
   
   // display list of enquiries
-  def index = TODO
+  def index = Action {
+    Ok(views.html.enquiries.index(EnquiryService.all))
+  }
 
   // display enquiry details
   def details(id: String) = TODO

@@ -1,4 +1,4 @@
-@(title: String)(content: Html)
+@(title: String)(content: Html)(implicit request: RequestHeader)
 
 <!DOCTYPE html>
 
@@ -12,6 +12,18 @@
         <link rel='stylesheet' media='screen' href='@routes.Assets.at("stylesheets/bootstrap.min.css")'>
     </head>
     <body>
-        @content
+    	<div id="login_panel">
+	    	@if(request.session.get("username").isEmpty) {
+	    		<a href="@routes.Auth.login" >Login</a>
+	    	} else {
+	    		Logged as @request.session.get("username") <a href="@routes.Auth.logout" >Logout</a> 
+	    	}
+    	</div>
+        <div class="container">
+            <div class="hero-unit">
+                <h1>Farmathon</h1>
+            </div>
+            @content
+        </div>
     </body>
 </html>
