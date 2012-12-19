@@ -1,4 +1,4 @@
-@(enquiryForm: Form[(String,String)])(implicit flash: Flash, request: RequestHeader)
+@(enquiryForm: Form[(String,String)], message: Option[String])(implicit flash: Flash, request: RequestHeader)
 
 
 @import play.api.i18n._
@@ -6,11 +6,13 @@
 
 @main("Search for enquiries"){
 <div>
-			@flash.get("success")
+		@if(!message.isEmpty){
+		<p class="alert alert-danger">@message</p>
+		}
 	
-	  @form(action = routes.Enquiries.search, args = 'id -> "enquirySearchForm") {
+	    @form(action = routes.Enquiries.search, args = 'id -> "enquirySearchForm") {
 
-	@partials.input(enquiryForm("surname"), "Last Name")
+		@partials.input(enquiryForm("surname"), "Last Name")
 		@partials.input(enquiryForm("enquiryId"), "Application Id")      
 
         <p class="buttons">

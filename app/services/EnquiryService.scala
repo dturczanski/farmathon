@@ -27,7 +27,7 @@ object EnquiryService {
 
   def update(enquiryName: EnquiryName): String = {
     if (enquiryName.id.equals("")) {
-      val enq = Enquiry(None, enquiryName.firstName, enquiryName.middleName, enquiryName.lastName, enquiryName.previousNames, "", "draft")
+      val enq = Enquiry(None, enquiryName.firstName, enquiryName.middleName, enquiryName.lastName, enquiryName.previousNames, "", "draft", None)
       return EnquiryDAO.insert(enq).get.toString()
     } else {
       val enq = get(enquiryName.id)
