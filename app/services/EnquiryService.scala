@@ -15,7 +15,7 @@ object EnquiryService {
   def all = EnquiryDAO.find(MongoDBObject.empty).toList
 
   def create(enquiryName: EnquiryName) {
-    val enq = Enquiry(None, enquiryName.firstName, enquiryName.middleName, enquiryName.lastName, enquiryName.previousNames, "")
+    val enq = Enquiry(None, enquiryName.firstName, enquiryName.middleName, enquiryName.lastName, enquiryName.previousNames, "", "draft")
     EnquiryDAO.insert(enq);
   }
 }
