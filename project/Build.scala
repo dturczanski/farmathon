@@ -11,7 +11,8 @@ object ApplicationBuild extends Build {
       // Add your project dependencies here,
         "com.mongodb.casbah" %% "casbah" % "2.1.5-1",
     	"com.novus" %% "salat-core" % "0.0.8-SNAPSHOT",
-    	"com.github.twitter" %  "bootstrap"  % "2.0.2"
+    	"com.github.twitter" %  "bootstrap"  % "2.0.2",
+    	"com.typesafe" %% "play-plugins-mailer" % "2.0.4"
     )
 
     val main = PlayProject(appName, appVersion, appDependencies, mainLang = SCALA).settings(
