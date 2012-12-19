@@ -1,4 +1,4 @@
-@(emptyForm: Form[viewmodels.EnquiryId])(implicit flash: Flash, request: RequestHeader)
+@(emptyForm: Form[viewmodels.EnquiryId], enquiry: Enquiry)(implicit flash: Flash, request: RequestHeader)
 
 @import play.api.i18n._
 @import views.html.helper._
@@ -18,6 +18,8 @@
 }
 
 @main("Create new application") {
+	@partials.enquiryDetail(enquiry)
+
 	@form(action = routes.Farmer.changeDetails, 'class -> "form-horizontal") {
 		<fieldset>
 			<legend>Change details</legend>

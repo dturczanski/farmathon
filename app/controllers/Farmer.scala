@@ -51,13 +51,17 @@ def farmerEmail = Action { implicit request =>
 	    form => BadRequest(views.html.farmer.email(form)),
 	    enquiryEmail => {
 	    	EnquiryService.update(enquiryEmail)
-	    	Ok(views.html.farmer.verify(emptyForm.fill(EnquiryId(enquiryEmail.id))))
+	    	val enquiry = EnquiryService.get(enquiryEmail.id)
+	    	Ok(views.html.farmer.verify(emptyForm.fill(EnquiryId(enquiryEmail.id)), enquiry))
 	    })
 }
 
 def changeDetails = Action { implicit request =>
 	emptyForm.bindFromRequest.fold(
-	    form => BadRequest(views.html.farmer.verify(form)),
+	    form => {
+	      val enquiry = EnquiryService.get(form.get.id)
+	      BadRequest(views.html.farmer.verify(form, enquiry))
+	    },
 	    enquiryId => {
 	    	Ok(views.html.farmer.name(farmerNameForm.fill(EnquiryService.getName(enquiryId.id))))
 	    })
@@ -65,7 +69,10 @@ def changeDetails = Action { implicit request =>
 
 def confirmDetails = Action { implicit request =>
 	emptyForm.bindFromRequest.fold(
-	    form => BadRequest(views.html.farmer.verify(form)),
+	    form => {
+	      val enquiry = EnquiryService.get(form.get.id)
+	      BadRequest(views.html.farmer.verify(form, enquiry))
+	    },
 	    enquiryId => {
 	        EnquiryService.updateStatus(enquiryId.id, "pending")
 	        EmailService.sendEmail(enquiryId.id)
