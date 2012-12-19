@@ -1,17 +1,17 @@
 @(enquiries: List[Enquiry])
 
 <table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-        </tr>
-    </thead>
-    <tbody>
-    @enquiries.map { e =>
-        <tr>
-            <td>@e.firstName</td>
-            <td>@e.lastName</td>
-        </tr>
-    }
+	<thead>
+		<tr>
+			<th>First Name</th>
+			<th>Last Name</th>
+		</tr>
+	</thead>
+	<tbody>
+		@enquiries.map { e =>
+		<tr>
+			<td>@e.firstName</td>
+			<td>@e.lastName</td>
+		</tr>
+		}
 </table>

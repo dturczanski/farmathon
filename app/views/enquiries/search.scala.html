@@ -1,13 +1,11 @@
-@(enquiryForm: Form[(String,String)])
+@(enquiryForm: Form[(String,String)])(implicit request: RequestHeader)
+
 
 @import helper._
-
 @import play.api.i18n._
 @import views.html.helper._
 
-<header>
-	<h1>Welcome to Farmathon</h1>
-</header>
+@main("Search for enquiries"){
 <div>
 	  @form(action = routes.Enquiries.search, args = 'id -> "enquirySearchForm") {
 
@@ -27,3 +25,4 @@
 
     }
 </div>
+}

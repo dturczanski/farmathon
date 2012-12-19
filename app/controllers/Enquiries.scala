@@ -16,9 +16,7 @@ object Enquiries extends Controller {
   ) 
   
   // display list of enquiries
-  def index = Action {
-    Ok(views.html.enquiries.index(EnquiryService.all))
-  }
+  def index = TODO
 
   // display enquiry details
   def details(id: String) = TODO
@@ -35,6 +33,8 @@ object Enquiries extends Controller {
       {case (surname, enquiryId) => {
         //EnquiryService.find(surname, enquiryId);
         Ok(views.html.enquiries.detail())        
+      }
+      case _ =>{Ok(views.html.enquiries.search(enquirySearchForm))
       }}
       )
   }
