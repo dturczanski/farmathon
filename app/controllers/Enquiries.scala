@@ -32,8 +32,8 @@ object Enquiries extends Controller {
   
   // accept enquiry
   def accept(id: String) = Action {implicit request =>
-    val accepted = true
-    if (accepted) EnquiryService.updateStatus(id, "accepted")
+    val acceptedParam = request.body.asFormUrlEncoded.get("accepted")(0)
+    if (acceptedParam.toBoolean) EnquiryService.updateStatus(id, "accepted")
     else EnquiryService.updateStatus(id, "rejected")
   	Ok("")
   } 
