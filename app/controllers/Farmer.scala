@@ -4,7 +4,7 @@ import play.api._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
-import services.EnquiryService
+import services._
 import viewmodels._
 
 object Farmer extends Controller {
@@ -68,6 +68,7 @@ def confirmDetails = Action { implicit request =>
 	    form => BadRequest(views.html.farmer.verify(form)),
 	    enquiryId => {
 	        EnquiryService.updateStatus(enquiryId.id, "pending")
+	        EmailService.sendEmail(enquiryId.id)
 	    	Ok(views.html.farmer.confirm(emptyForm.fill(enquiryId)))
 	    })
 }
