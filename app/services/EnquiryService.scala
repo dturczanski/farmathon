@@ -58,4 +58,7 @@ object EnquiryService {
     val enquiry = get(id)
     EnquiryDAO.update(MongoDBObject("_id" -> enquiry._id), grater[Enquiry].asDBObject(enquiry.copy(status = newStatus)), false, false)
   }
+
+  def findByIdAndSurname(id: String, surname: String) = EnquiryDAO.findOne(MongoDBObject("_id" -> new ObjectId(id), "lastName" -> surname))
+
 }

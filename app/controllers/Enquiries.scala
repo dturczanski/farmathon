@@ -6,6 +6,9 @@ import play.api.data._
 import play.api.data.Forms._
 import services.EnquiryService
 import com.mongodb.casbah.Imports._
+import models.Enquiry
+import anorm._
+import views._
 
 object Enquiries extends Controller {
   
@@ -14,11 +17,11 @@ object Enquiries extends Controller {
       "surname" -> nonEmptyText,
       "enquiryId" -> nonEmptyText
     )
-  ) 
+  )
   
   // display list of enquiries
   def index = Action { implicit request =>
-    Ok(views.html.enquiries.index(EnquiryService.all))
+    Ok(html.enquiries.index(EnquiryService.all))
   }
 
   // display enquiry details
@@ -35,19 +38,27 @@ object Enquiries extends Controller {
   	Ok("")
   } 
   
-  // decline enquiry
   def decline(id: String) = Action {implicit request =>
     EnquiryService.updateStatus(id, "rejected")
   	Ok("")
   } 
+
+
+  def searchForm= Action { implicit request =>
+    Ok(html.enquiries.search(enquirySearchForm))
+  }
+  
   def search = Action { implicit request =>
     enquirySearchForm.bindFromRequest.fold(
-      formWithErrors => BadRequest(views.html.enquiries.search(formWithErrors)),
+      formWithErrors => BadRequest(html.enquiries.search(formWithErrors)),
       {case (surname, enquiryId) => {
-        //EnquiryService.find(surname, enquiryId);
-        Ok(views.html.enquiries.detail())        
+          val enquiry = EnquiryService.findByIdAndSurname(enquiryId, surname)
+          enquiry match{
+            case None => Ok(html.enquiries.notFound())
+            case enquiry => Ok(html.enquiries.detail(enquiry.get))            
+          }
       }
-      case _ =>{Ok(views.html.enquiries.search(enquirySearchForm))
+      case _ =>{Ok(html.enquiries.search(enquirySearchForm))
       }}
       )
   }
