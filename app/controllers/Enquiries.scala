@@ -21,11 +21,16 @@ object Enquiries extends Controller {
   }
 
   // display enquiry details
-  def details(id: String) = TODO
-
+  def details(id: String) = Action {implicit request =>
+  	Ok(views.html.enquiries.details())
+  }
+  
   // accept enquiry
-  def accept(id: String) = TODO
-
+  def accept(id: String) = Action {implicit request =>
+    EnquiryService.updateStatus(id, "accepted")
+  	Ok("")
+  } 
+  
   // decline enquiry
   def decline(id: String) = TODO
 

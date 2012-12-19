@@ -51,4 +51,9 @@ object EnquiryService {
     val email = EnquiryEmail(id, enq.email)
     email
   }
+  
+  def updateStatus(id : String, newStatus : String) {
+    val enquiry = EnquiryDAO.findOneByID(new ObjectId(id)).get
+    EnquiryDAO.update(MongoDBObject("_id" -> enquiry._id), grater[Enquiry].asDBObject(enquiry.copy(status = newStatus)), false, false)
+  }
 }
