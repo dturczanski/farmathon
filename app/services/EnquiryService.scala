@@ -33,7 +33,7 @@ object EnquiryService {
       }
       
       case None => {
-    	val enq = Enquiry(None, enquiryName.firstName, enquiryName.middleName, enquiryName.lastName, enquiryName.previousNames, "")
+    	val enq = Enquiry(None, enquiryName.firstName, enquiryName.middleName, enquiryName.lastName, enquiryName.previousNames, "", "draft")
     	EnquiryDAO.insert(enq)
       }
     } 
