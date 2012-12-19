@@ -6,29 +6,35 @@ import com.novus.salat.global._
 import org.scala_tools.time.Imports._
 import models._
 import viewmodels._
+import com.novus.salat.dao.SalatDAO
+
+object EnquiryDAO extends SalatDAO[Enquiry, ObjectId](collection = MongoConnection()("farmathon")("enquiries"))
 
 object EnquiryService {
-  val data = MongoConnection()("farmathon")("enquiries")
 
-  def all = data.map(grater[Enquiry].asObject(_)).toList
+  def all = EnquiryDAO.find(MongoDBObject.empty).toList
   
   def get(id: ObjectId): Enquiry = {
-    val o : DBObject = MongoDBObject("id" -> id)
-    val enq : Enquiry = grater[Enquiry].asObject(o)
-    enq
+    val enq: Option[Enquiry] = EnquiryDAO.findOneById(id)
+    enq.get
   }
   
   def update(id: Option[ObjectId], enquiryName: EnquiryName) {
     id match {
       case Some(objectId) => {
         val enq = get(objectId)
-        enq.firstName = enquiryName.firstName
+        val updated = enq.copy(firstName = enquiryName.firstName,
+        						middleName = enquiryName.middleName,
+        						lastName = enquiryName.lastName,
+        						previousNames = enquiryName.previousNames)
+        // TODO
+        //EnquiryDAO.update()
         
       }
       
       case None => {
     	val enq = Enquiry(None, enquiryName.firstName, enquiryName.middleName, enquiryName.lastName, enquiryName.previousNames, "")
-    	data += grater[Enquiry].asDBObject(enq)
+    	EnquiryDAO.insert(enq)
       }
     } 
 

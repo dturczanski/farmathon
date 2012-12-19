@@ -32,7 +32,7 @@ def farmerName = Action { implicit request =>
 	farmerNameForm.bindFromRequest.fold(
 		form => BadRequest(views.html.farmer.name(form)),
 		enquiryName => {
-			EnquiryService.create(enquiryName)
+			EnquiryService.update(None, enquiryName)
 			Ok(views.html.farmer.email(farmerEmailForm)).flashing("message" -> "Names information successfully saved")
 		}
 	)

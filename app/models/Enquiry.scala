@@ -13,3 +13,4 @@ case class Enquiry (
   email: String,
   status: String
 )
+
