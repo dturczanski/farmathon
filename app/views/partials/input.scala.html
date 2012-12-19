@@ -1,0 +1,9 @@
+@(field: Field, label: String, fieldType: Symbol = 'text)
+<div class="control-group @if(field.hasErrors) {error}">
+	<label class="control-label" for="@field.id">@label</label>
+	<div class="controls">
+		<input type="@fieldType.name" value="@field.value" name="@field.id" />
+		@if(field.hasErrors){ <span class="help-inline">
+			@Messages(field.error.head.message) </span> }
+	</div>
+</div>

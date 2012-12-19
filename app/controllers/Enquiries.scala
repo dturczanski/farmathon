@@ -52,7 +52,7 @@ object Enquiries extends Controller with Secured {
         case (surname, enquiryId) => {
           val enquiry = EnquiryService.findByIdAndSurname(enquiryId, surname)
           enquiry match {
-            case None => Ok(html.enquiries.search(enquirySearchForm)).flashing("notFound" -> "Application not found")
+            case None => Ok(html.enquiries.search(enquirySearchForm)).flashing("success" -> "Application not found")
             case enquiry => Ok(html.enquiries.detail(enquiry.get))
           }
         }

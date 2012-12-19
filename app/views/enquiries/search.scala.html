@@ -1,30 +1,17 @@
 @(enquiryForm: Form[(String,String)])(implicit flash: Flash, request: RequestHeader)
 
 
-@import helper._
 @import play.api.i18n._
 @import views.html.helper._
 
 @main("Search for enquiries"){
 <div>
-@flash.get("notFound").map { message =>
-		    <p class="alert alert-error">
-		        @message
-		    </p>
-	}
+			@flash.get("success")
+	
 	  @form(action = routes.Enquiries.search, args = 'id -> "enquirySearchForm") {
 
-        @inputText(
-            field = enquiryForm("surname"),
-            args = '_label -> "Please input your Surname",
-           'placeholder -> "Please input your Surname"
-        )
-
-        @inputText(
-            field = enquiryForm("enquiryId"),
-            args = '_label -> "Application Id",
-           'placeholder -> "Application Id"
-        )
+	@partials.input(enquiryForm("surname"), "Last Name")
+		@partials.input(enquiryForm("enquiryId"), "Application Id")      
 
         <p class="buttons">
             <input type="submit" id="submit">
