@@ -1,4 +1,4 @@
-@(farmerNameForm: Form[viewmodels.EnquiryEmail])(implicit flash: Flash, request: RequestHeader)
+@(farmerEmailForm: Form[viewmodels.EnquiryEmail])(implicit flash: Flash, request: RequestHeader)
 
 @import play.api.i18n._
 @import views.html.helper._
@@ -21,12 +21,13 @@
 	@form(action = routes.Farmer.farmerEmail, 'class -> "form-horizontal") {
 		<fieldset>
 			<legend>Identifying my Digital Identity</legend>
-			@farmerNameForm.globalError.map { error =>
+			@farmerEmailForm.globalError.map { error =>
 				<div class='row'>
 					<div class="alert alert-error">@error.message</div>
 				</div>
 			}
-			@input(farmerNameForm("email"), "Email Address")
+			<input type="hidden" value="@farmerEmailForm("id").value" name="id" />
+			@input(farmerEmailForm("email"), "Email Address")
 		</fieldset>
 		<input type="submit" class="btn" value="Next step"/>
 	}
