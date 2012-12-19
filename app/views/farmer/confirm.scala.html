@@ -20,17 +20,9 @@
 @main("Create new application") {
 	@form(action = routes.Farmer.changeDetails, 'class -> "form-horizontal") {
 		<fieldset>
-			<legend>Change details</legend>
-			<input type="hidden" value="@emptyForm("id").value" name="id" />
+			<legend>Successfully submitted application details</legend>
+			Your application's reference number: <b>@emptyForm("id").value</b><br />
+			You can use it to search for your application later <a class="btn btn-primary btn-small" href="@routes.Enquiries.search">here</a>
 		</fieldset>
-		<input type="submit" class="btn" value="Change your details"/>
-	}
-	
-	@form(action = routes.Farmer.confirmDetails, 'class -> "form-horizontal") {
-		<fieldset>
-			<legend>Confirm details and submit application</legend>
-			<input type="hidden" value="@emptyForm("id").value" name="id" />
-		</fieldset>
-		<input type="submit" class="btn" value="Submit"/>
 	}
 }

@@ -24,6 +24,7 @@ GET		/apply/step1				controllers.Farmer.index
 POST	/apply/step1				controllers.Farmer.farmerName
 POST	/apply/step2				controllers.Farmer.farmerEmail
 POST	/apply/verify				controllers.Farmer.changeDetails
+POST	/apply/confirm				controllers.Farmer.confirmDetails
 
 
 # Map static resources from the /public folder to the /assets URL path

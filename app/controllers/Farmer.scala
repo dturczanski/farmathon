@@ -26,7 +26,7 @@ def farmerEmailForm = Form(
 	)(EnquiryEmail.apply)(EnquiryEmail.unapply)
 )
 
-def changeDetailsForm = Form(
+def emptyForm = Form(
 	mapping(
 	    "id" -> nonEmptyText
 	)(EnquiryId.apply)(EnquiryId.unapply)
@@ -51,17 +51,24 @@ def farmerEmail = Action { implicit request =>
 	    form => BadRequest(views.html.farmer.email(form)),
 	    enquiryEmail => {
 	    	EnquiryService.update(enquiryEmail)
-	    	//Ok(views.html.index())
-	    	
-	    	Ok(views.html.farmer.verify(changeDetailsForm.fill(EnquiryId(enquiryEmail.id))))
+	    	Ok(views.html.farmer.verify(emptyForm.fill(EnquiryId(enquiryEmail.id))))
 	    })
 }
 
 def changeDetails = Action { implicit request =>
-	changeDetailsForm.bindFromRequest.fold(
+	emptyForm.bindFromRequest.fold(
 	    form => BadRequest(views.html.farmer.verify(form)),
 	    enquiryId => {
 	    	Ok(views.html.farmer.name(farmerNameForm.fill(EnquiryService.getName(enquiryId.id))))
+	    })
+}
+
+def confirmDetails = Action { implicit request =>
+	emptyForm.bindFromRequest.fold(
+	    form => BadRequest(views.html.farmer.verify(form)),
+	    enquiryId => {
+	        EnquiryService.updateStatus(enquiryId.id, "pending")
+	    	Ok(views.html.farmer.confirm(emptyForm.fill(enquiryId)))
 	    })
 }
 
