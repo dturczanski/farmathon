@@ -16,7 +16,7 @@ object Enquiries extends Controller {
   ) 
   
   // display list of enquiries
-  def index = TODO
+  }
 
   // display enquiry details
   def details(id: String) = TODO
