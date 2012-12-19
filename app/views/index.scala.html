@@ -1,0 +1,17 @@
+@()(implicit request: RequestHeader)
+
+@main("Farmathon") {
+    <div class="hero-unit">
+        <h1>Farmathon</h1>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+            ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+            eu fugiat nulla pariatur.
+        </p>
+        <p>
+            <a class="btn btn-primary btn-large" href="@routes.Farmer.index">Apply for subsidy</a>
+            <a class="btn btn-primary btn-large" href="@routes.Enquiries.search">Check my application</a>
+        </p>
+    </div>
+}
