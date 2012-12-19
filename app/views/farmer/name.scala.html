@@ -26,6 +26,7 @@
 					<div class="alert alert-error">@error.message</div>
 				</div>
 			}
+			<input type="hidden" value="@farmerNameForm("id").value" name="id" />
 			@input(farmerNameForm("firstName"), "First name")
 			@input(farmerNameForm("middleName"), "Middle name (optional)")
 			@input(farmerNameForm("lastName"), "Last name")

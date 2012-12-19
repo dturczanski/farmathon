@@ -12,6 +12,7 @@ object Farmer extends Controller {
   
 def farmerNameForm = Form(
 	mapping(
+	    "id" -> text,
 		"firstName" -> nonEmptyText,
 		"middleName" -> text,
 		"lastName" -> nonEmptyText,
@@ -21,6 +22,7 @@ def farmerNameForm = Form(
 
 def farmerEmailForm = Form(
 	mapping(
+	    "id" -> text,
 		"email" -> nonEmptyText
 	)(EnquiryEmail.apply)(EnquiryEmail.unapply)
 )
@@ -33,8 +35,8 @@ def farmerName = Action { implicit request =>
 	farmerNameForm.bindFromRequest.fold(
 		form => BadRequest(views.html.farmer.name(form)),
 		enquiryName => {
-			EnquiryService.update(None, enquiryName)
-			Ok(views.html.farmer.email(farmerEmailForm)).flashing("message" -> "Names information successfully saved")
+			val id = EnquiryService.update(enquiryName)
+			Ok(views.html.farmer.email(farmerEmailForm.fill(EnquiryService.getEmail(id)))).flashing("message" -> "Names information successfully saved")
 		}
 	)
 }
@@ -42,9 +44,11 @@ def farmerName = Action { implicit request =>
 def farmerEmail = Action { implicit request =>
 	farmerEmailForm.bindFromRequest.fold(
 	    form => BadRequest(views.html.farmer.email(form)),
-	    enquiryName => {
+	    enquiryEmail => {
 	    	//EnquiryService.update(enquiryEmail)
-	    	Ok(views.html.index())
+	    	//Ok(views.html.index())
+	    	
+	    	Ok(views.html.farmer.name(farmerNameForm.fill(EnquiryService.getName(enquiryEmail.id))))
 	    })
 }
 
