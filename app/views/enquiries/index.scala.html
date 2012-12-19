@@ -1,21 +1,21 @@
 @(enquiries: List[Enquiry])(implicit request: RequestHeader)
 
 @main("Enquiries"){
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-            </tr>
-        </thead>
-        <tbody>
-        @enquiries.map { e =>
-            <tr>
-                <td><a href="@routes.Enquiries.details(e.id.toString)">@e.id.toString</a></td>
-                <td>@e.firstName</td>
-                <td>@e.lastName</td>
-            </tr>
-        }
-    </table>
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+		</tr>
+	</thead>
+	<tbody>
+		@enquiries.map { e =>
+		<tr>
+			<td><a href="@routes.Enquiries.details(e._id.get.toString)">@e._id.get.toString</a></td>
+			<td>@e.firstName</td>
+			<td>@e.lastName</td>
+		</tr>
+		}
+</table>
 }

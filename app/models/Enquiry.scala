@@ -5,7 +5,7 @@ import com.mongodb.casbah.Imports._
 
 // Enquiry (farmer's application) model
 case class Enquiry (
-  id: Option[ObjectId],
+  _id: Option[ObjectId],
   firstName: String,
   middleName: String,
   lastName: String,
