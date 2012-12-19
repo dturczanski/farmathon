@@ -1,6 +1,14 @@
 @(enquiry: Enquiry)
 <div>
-<h2>@enquiry.firstName @enquiry.middleName @enquiry.lastName</h2>
+	<header>
+		<h2>@enquiry.firstName @enquiry.middleName @enquiry.lastName</h2>
+		<h5>
+			previously <strong>@enquiry.previousNames</strong>
+		</h5>
+	</header>
+	<article>
+		<p class="alert">Status: "@enquiry.status"</p>
+	</article>
 </div>
 
 
