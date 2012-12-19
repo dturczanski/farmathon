@@ -35,8 +35,8 @@ object EnquiryService {
         						middleName = enquiryName.middleName,
         						lastName = enquiryName.lastName,
         						previousNames = enquiryName.previousNames)
-        // TODO
-        //EnquiryDAO.update()
+
+       EnquiryDAO.update(MongoDBObject("_id" -> updated._id), grater[Enquiry].asDBObject(updated), false, false)
        return enquiryName.id;
     }
         
@@ -55,7 +55,7 @@ object EnquiryService {
   }
   
   def updateStatus(id : String, newStatus : String) {
-    val enquiry = EnquiryDAO.findOneById(new ObjectId(id)).get
+    val enquiry = get(id)
     EnquiryDAO.update(MongoDBObject("_id" -> enquiry._id), grater[Enquiry].asDBObject(enquiry.copy(status = newStatus)), false, false)
   }
 }
