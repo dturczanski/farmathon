@@ -22,7 +22,8 @@ POST    /enquiries/decline/:id      controllers.Enquiries.decline(id: String)
 # Wizard
 GET		/apply						controllers.Farmer.index
 GET		/apply/step1				controllers.Farmer.index
-POST	/apply/step2				controllers.Farmer.farmerName
+POST	/apply/step1				controllers.Farmer.farmerName
+POST	/apply/step2				controllers.Farmer.farmerEmail
 
 
 # Map static resources from the /public folder to the /assets URL path

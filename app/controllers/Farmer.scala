@@ -6,6 +6,7 @@ import play.api.data._
 import play.api.data.Forms._
 import services.EnquiryService
 import viewmodels.EnquiryName
+import viewmodels.EnquiryEmail
 
 object Farmer extends Controller {
   
@@ -42,8 +43,8 @@ def farmerEmail = Action { implicit request =>
 	farmerEmailForm.bindFromRequest.fold(
 	    form => BadRequest(views.html.farmer.email(form)),
 	    enquiryName => {
-	    	EnquiryService.sdfsd(enquiryEmail)
-	    	Redirect(router.farmer)
+	    	//EnquiryService.update(enquiryEmail)
+	    	Ok(views.html.index())
 	    })
 }
 
