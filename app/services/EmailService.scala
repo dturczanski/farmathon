@@ -34,7 +34,7 @@ object EmailService {
 	mail.setSubject("Your application has been accepted")
 	mail.addRecipient(enq.firstName + " " + enq.lastName + " <" + enq.email + ">", enq.email)
 	mail.addFrom("Gdansk Hakaton Team <l.skibski@kainos.com>")
-	val contents: String = "Hello " + enq.firstName +",Your application has been accepted.\n\nYour application details:\n\n" +  enq.firstName + " " +
+	val contents: String = "Hello " + enq.firstName +",\n\nYour application has been accepted.\n\nYour application details:\n\n" +  enq.firstName + " " +
 			enq.middleName + " " + enq.lastName + " " + enq.previousNames + "\n" + enq.email +
 			"\nApplication reference number: " + id + "\n\nRegards,\nFarmathon Team";
 	mail.send(contents)
@@ -48,7 +48,7 @@ object EmailService {
 	mail.setSubject("Your application has been accepted")
 	mail.addRecipient(enq.firstName + " " + enq.lastName + " <" + enq.email + ">", enq.email)
 	mail.addFrom("Gdansk Hakaton Team <l.skibski@kainos.com>")
-	val contents: String = "Hello " + enq.firstName +",Your application has been rejected.\n\nYour application details:\n\n" +  enq.firstName + " " +
+	val contents: String = "Hello " + enq.firstName +",\n\nYour application has been rejected.\n\nYour application details:\n\n" +  enq.firstName + " " +
 			enq.middleName + " " + enq.lastName + " " + enq.previousNames + "\n" + enq.email +
 			"\nApplication reference number: " + id + "\n\nRegards,\nFarmathon Team";
 	mail.send(contents)
