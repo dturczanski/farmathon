@@ -2,9 +2,19 @@ package controllers
 
 import play.api._
 import play.api.mvc._
+import play.api.data._
+import play.api.data.Forms._
 import services.EnquiryService
 
 object Enquiries extends Controller {
+  
+   val enquirySearchForm = Form(
+    tuple(
+      "surname" -> nonEmptyText,
+      "enquiryId" -> nonEmptyText
+    )
+  ) 
+  
   // display list of enquiries
   def index = TODO
 
@@ -18,8 +28,8 @@ object Enquiries extends Controller {
   def decline(id: String) = TODO
 
   def search = Action { implicit request =>
-    Application.enquirySearchForm.bindFromRequest.fold(
-      formWithErrors => BadRequest(views.html.index(formWithErrors)),
+    enquirySearchForm.bindFromRequest.fold(
+      formWithErrors => BadRequest(views.html.enquiries.search(formWithErrors)),
       {case (surname, enquiryId) => {
         //EnquiryService.find(surname, enquiryId);
         Ok(views.html.enquiries.detail())        
