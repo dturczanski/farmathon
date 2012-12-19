@@ -27,7 +27,7 @@
 				</div>
 			}
 			<input type="hidden" value="@farmerEmailForm("id").value" name="id" />
-			@input(farmerEmailForm("email"), "Email Address")
+			<input type="email" name="email" placeholder="j.bloggs&#64;example.com" id="email" value="@farmerEmailForm("email").value">
 		</fieldset>
 		<input type="submit" class="btn" value="Next step"/>
 	}

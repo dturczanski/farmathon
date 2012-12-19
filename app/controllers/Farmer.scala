@@ -45,7 +45,7 @@ def farmerEmail = Action { implicit request =>
 	farmerEmailForm.bindFromRequest.fold(
 	    form => BadRequest(views.html.farmer.email(form)),
 	    enquiryEmail => {
-	    	//EnquiryService.update(enquiryEmail)
+	    	EnquiryService.update(enquiryEmail)
 	    	//Ok(views.html.index())
 	    	
 	    	Ok(views.html.farmer.name(farmerNameForm.fill(EnquiryService.getName(enquiryEmail.id))))

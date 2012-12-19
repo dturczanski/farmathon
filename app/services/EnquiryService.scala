@@ -39,7 +39,13 @@ object EnquiryService {
        EnquiryDAO.update(MongoDBObject("_id" -> updated._id), grater[Enquiry].asDBObject(updated), false, false)
        return enquiryName.id;
     }
-        
+  }
+  
+  def update(enquiryEmail: EnquiryEmail) {
+      val enq = get(enquiryEmail.id)
+      val updated = enq.copy(email = enquiryEmail.email)
+
+       EnquiryDAO.update(MongoDBObject("_id" -> updated._id), grater[Enquiry].asDBObject(updated), false, false)
   }
   
   def getName(id: String): EnquiryName = {
