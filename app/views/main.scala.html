@@ -18,7 +18,8 @@
 	    	@if(request.session.get("username").isEmpty) {
 	    		<a href="@routes.Auth.login" >Login</a>
 	    	} else {
-	    		Logged as @request.session.get("username") <a href="@routes.Auth.logout" >Logout</a> 
+	    		<p>Logged as @request.session.get("username") <a href="@routes.Auth.logout" >Logout</a></p>
+	    		<p><a href="@routes.Enquiries.index" >List of applications</a></p>
 	    	}
     	</div>
         <div class="container">
