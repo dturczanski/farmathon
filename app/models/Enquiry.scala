@@ -11,6 +11,7 @@ case class Enquiry (
   lastName: String,
   previousNames: String,
   email: String,
-  status: String
+  status: String,
+  comments: Option[String]
 )
 
