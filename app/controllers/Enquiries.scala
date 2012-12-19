@@ -37,14 +37,8 @@ object Enquiries extends Controller with Secured{
     val acceptedParam = request.body.asFormUrlEncoded.get("accepted")(0)
     if (acceptedParam.toBoolean) EnquiryService.updateStatus(id, "accepted")
     else EnquiryService.updateStatus(id, "rejected")
-  	Ok("")
+  	Redirect(routes.Enquiries.details(id))
   } 
-  
-  def decline(id: String) = Action {implicit request =>
-    EnquiryService.updateStatus(id, "rejected")
-  	Ok("")
-  } 
-
 
   def searchForm= Action { implicit request =>
     Ok(html.enquiries.search(enquirySearchForm))

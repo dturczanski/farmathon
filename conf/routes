@@ -17,8 +17,6 @@ GET     /enquiries/search           controllers.Enquiries.searchForm
 POST     /enquiries/search          controllers.Enquiries.search
 GET     /enquiries/:id              controllers.Enquiries.details(id: String)
 POST    /enquiries/accept/:id       controllers.Enquiries.accept(id: String)
-POST    /enquiries/decline/:id      controllers.Enquiries.decline(id: String)
-
 
 # Wizard
 GET		/apply						controllers.Farmer.index
