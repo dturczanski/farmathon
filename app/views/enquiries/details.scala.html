@@ -1,2 +1,13 @@
-@()(implicit request: RequestHeader)
+@(enquiry: models.Enquiry)(implicit request: RequestHeader)
 
+@main("Enquiry details") {
+
+Status: @enquiry.status
+
+<form action="@routes.Enquiries.accept(enquiry._id.get.toString)" method="post">
+	<input type="submit" value="Accept" />
+	<input type="submit" value="Reject" />
+</form>
+@if(enquiry.status=="pending") {
+}
+}

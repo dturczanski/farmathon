@@ -5,6 +5,7 @@ import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
 import services.EnquiryService
+import com.mongodb.casbah.Imports._
 
 object Enquiries extends Controller {
   
@@ -22,18 +23,23 @@ object Enquiries extends Controller {
 
   // display enquiry details
   def details(id: String) = Action {implicit request =>
-  	Ok(views.html.enquiries.details())
+    val enquiry = EnquiryService.get(new ObjectId(id))
+  	Ok(views.html.enquiries.details(enquiry))
   }
   
   // accept enquiry
   def accept(id: String) = Action {implicit request =>
-    EnquiryService.updateStatus(id, "accepted")
+    val accepted = true
+    if (accepted) EnquiryService.updateStatus(id, "accepted")
+    else EnquiryService.updateStatus(id, "rejected")
   	Ok("")
   } 
   
   // decline enquiry
-  def decline(id: String) = TODO
-
+  def decline(id: String) = Action {implicit request =>
+    EnquiryService.updateStatus(id, "rejected")
+  	Ok("")
+  } 
   def search = Action { implicit request =>
     enquirySearchForm.bindFromRequest.fold(
       formWithErrors => BadRequest(views.html.enquiries.search(formWithErrors)),

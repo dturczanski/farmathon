@@ -53,7 +53,7 @@ object EnquiryService {
   }
   
   def updateStatus(id : String, newStatus : String) {
-    val enquiry = EnquiryDAO.findOneByID(new ObjectId(id)).get
+    val enquiry = EnquiryDAO.findOneById(new ObjectId(id)).get
     EnquiryDAO.update(MongoDBObject("_id" -> enquiry._id), grater[Enquiry].asDBObject(enquiry.copy(status = newStatus)), false, false)
   }
 }
